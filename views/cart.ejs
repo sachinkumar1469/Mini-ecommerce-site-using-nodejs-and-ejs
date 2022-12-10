@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        form{
+            width: 20%;
+            margin: 8px auto;
+            display: flex;
+            justify-content: center;
+            
+        }
+        .btn{
+            color: white;
+            cursor: pointer;
+        }
+        h3{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>My Cart</h1>
+        <p>List of all items...</p>   
+        <div class="product-wrapper">
+
+            <%for(let product of cartProd) { %> 
+                <div class="product">
+                <h4><%=product.title%></h4>
+                <img src="<%=product.imageUrl%>" alt="">
+                <p>Price: <%= product.productPrice%>$</p>
+                <P>Quantity: <%=product.qty%></P>
+                <a href="/product/<%=product.id%>" class="btn">View Details</a>
+                <!-- <form action="/cart/add-product" method="POST">
+                    <button type="submit" class="btn">Add to Cart</button>
+                    <input type="hidden" name="productId" value="<%=product.id%>">
+                </form> -->
+            </div>
+            <% }%>
+        </div>
+    </main>
+    <br>
+    <h3> Total Price : <%=cartPrice%> </h3>
+    <form action="/order" method="post">
+        <button type="submit" class="btn">Place Order</button>
+    </form>
+</body>
+</html>

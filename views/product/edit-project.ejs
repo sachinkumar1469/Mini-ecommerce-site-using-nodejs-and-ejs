@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Project</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">shop</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Edit Product <%=id%></h1>
+    <main>
+        <form method="post" action="/admin/update-product">
+            <input type="hidden" name="id" id="" value="<%=id%>" >
+            <input type="text" name="title" id="" placeholder="New Title" >
+            <input type="text" name="imageUrl" id="" placeholder="New Image URL">
+            <input type="number" name="productPrice" id="" placeholder="New Product Price">
+            <button type="submit">Edit Product</button>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Console</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        form{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">shop</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Admin Console</h1>
+    <main>
+        <form method="post" action="/admin/add-product">
+            <input type="text" name="title" id="" placeholder="Title">
+            <input type="text" name="imageUrl" id="" placeholder="Image URL">
+            <input type="number" name="productPrice" id="" placeholder="Product Price">
+            <button type="submit">Add Product</button>
+        </form>
+        <h3 style="text-align:center; margin: 8px;">Availabe Products..</h3>
+        <div class="product-wrapper">
+            <% for(let product of products) { %>
+                <div class="product">
+                    <h4><%=product.title%></h4>
+                    <img src="<%=product.imageUrl%>" alt="">
+                    <p>Price: <%= product.productPrice%>$</p>
+                    <a href="/admin/edit-product?edit=true&id=<%=product.id%>" class="btn">Edit</a>
+                    <form action="/admin/delete" method="POST">
+                        <a href="" class="btn">Delete</a>
+                    </form>
+                </div>
+            <% }%>
+        </div>
+    </main>
+</body>
+</html>

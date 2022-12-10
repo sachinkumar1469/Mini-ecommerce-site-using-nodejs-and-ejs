@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .product-wrapper{
+            grid-template-columns: 40%;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn{
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/cart">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="product-wrapper">      
+            <div class="product">
+                <h4><%=product.title%></h4>
+                <img src="<%=product.imageUrl%>" alt="">
+                <p>Price: <%= product.productPrice%>$</p>
+                <form action="/cart/add-product" method="POST">
+                    <button type="submit" class="btn">Add to Cart</button>
+                    <input type="hidden" name="productId" value="<%=product.id%>">
+                </form>
+            </div>
+        
+    </div>
+</body>
+</html>
