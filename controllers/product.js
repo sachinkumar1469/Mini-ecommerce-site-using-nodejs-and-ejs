@@ -1,9 +1,17 @@
-const adminImport = require('../routes/admin')
-const products = require('../models/product')
+const path = require('path');
 
-exports.postAddProduct = (req,res,next)=>{
-    // console.log(req.body);
-    let product = new products.Product(req.body.title,req.body.imageUrl,req.body.productPrice);
-    product.save();
-    res.redirect('/');
+const productModels = require('../models/product')
+exports.defaultProductPath = (req,res,next)=>{
+    res.send("Not Valid Product");
+}
+
+
+// This function is used to handle /product/:productId route it recieves an productId as param argument
+exports.viewProductDetail = (req,res,next)=>{
+    productModels.Product.getProductUsingId((productDetail)=>{
+        //Product Detail is an array of objects
+        // console.log(Array.isArray(productDetail));
+        res.render(path.join(require.main.filename,'..','views','product','product-details'),{product:productDetail[0]})
+    },req.params.productId)
+    
 }

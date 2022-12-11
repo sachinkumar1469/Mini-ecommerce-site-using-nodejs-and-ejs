@@ -112,6 +112,11 @@ h1,h2{
     border-radius: 5px;
     height: 2rem;
     transition: all 400ms ease;
+    font-size: 1rem !important;
+    
+}
+form .btn{
+    font-family: inherit;
 }
 .btn:hover{
     transform: scale(1.2);

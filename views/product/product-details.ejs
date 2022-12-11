@@ -31,7 +31,8 @@
             <div class="product">
                 <h4><%=product.title%></h4>
                 <img src="<%=product.imageUrl%>" alt="">
-                <p>Price: <%= product.productPrice%>$</p>
+                <p>Price: <%= product.price%>$</p>
+                <p><%=product.description%></p>
                 <form action="/cart/add-product" method="POST">
                     <button type="submit" class="btn">Add to Cart</button>
                     <input type="hidden" name="productId" value="<%=product.id%>">

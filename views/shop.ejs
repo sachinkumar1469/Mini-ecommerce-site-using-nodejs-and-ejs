@@ -31,6 +31,7 @@
                     <h4><%=product.title%></h4>
                     <img src="<%=product.imageUrl%>" alt="">
                     <p>Price: <%= product.price%>$</p>
+                    <p><%= product.description%></p>
                     <a href="/product/<%=product.id%>" class="btn">View Details</a>
                     <form action="/cart/add-product" method="POST">
                         <button type="submit" class="btn">Add to Cart</button>
