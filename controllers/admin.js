@@ -1,39 +1,76 @@
 const path = require('path');
-const db = require('../utils/database');
-const productModels = require('../models/product')
+
+const Products = require('../models/product')
 
 exports.defaultAdminRoute = (req,res,next)=>{
-    productModels.Product.getProducts((productsData)=>{
-        // console.log(productsData)
-        res.render(path.join(require.main.filename,'..','views','admin'),{products:productsData});
-    })
+        Products.findAll({})
+            .then((result)=>{
+                res.render(path.join(require.main.filename,'..','views','admin'),{products:result});
+            })
+            .catch((err)=>{
+                console.log('unable to fetch products in admin to display')
+            })
 }
 
 exports.addProductHandler = (req,res,next)=>{
     // console.log(req.body); 
-    const newProd = new productModels.Product({...req.body});
-    newProd.save(()=>{
-        res.redirect('/admin')
-    })
+    const {title,imageUrl,description,price} = req.body;
+        Products.create({
+            title,
+            imageUrl,
+            price:JSON.parse(price),
+            description
+        }).then(result=>{
+            res.redirect('/admin');
+        }).catch(err=>{
+            console.log('error while adding new product')
+        });   
 }
 
 exports.editProduct = (req,res,next)=>{
     // console.log(req.query);
-    productModels.Product.getProductUsingId((productData)=>{
-        res.render(path.join(require.main.filename,'..','views','product','edit-product'),{product:productData[0]});
-    },req.query.id);
+    const productId = req.query.id;
+    Products.findAll({
+        where:{
+            id:productId
+        }
+    })
+    .then((result)=>{
+        res.render(path.join(require.main.filename,'..','views','product','edit-product'),{product:result[0]});
+    });
+    
 }
 
 exports.updateProduct = (req,res,next)=>{
     // console.log(req.body);
-    productModels.Product.updateProduct({...req.body},()=>{
-        res.redirect('/admin');
-    })
+        Products.update(
+            {...req.body},
+            {
+                where:{
+                    id:req.body.id
+                }
+            }
+        )
+        .then((result)=>{
+            res.redirect('/admin');
+        })
+        .catch((err)=>{
+            console.log('Error while updataing the product detalis')
+        })
+    
 }
 
 exports.deleteProduct = (req,res,next)=>{
-    console.log(req.body);
-    productModels.Product.deleteProduct(JSON.parse(req.body.deleteId),()=>{
-        res.redirect('/admin')
-    });
+    const productId = req.body.deleteId;
+        Products.destroy({
+            where:{
+                id:productId
+            }
+        })
+        .then((result)=>{
+            res.redirect('/admin')
+        })
+        .catch(err=>{
+            console.log('Unable to delete')
+        })
 }
