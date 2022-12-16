@@ -25,101 +25,17 @@ nav ul li a {
     text-decoration: none;
     color: black;
 }
-h1,p{
-    text-align: center;
-    margin-top: 10px;
-}
+
 
 
 h1{
     text-align: center;
     margin-top: 10px;
 }
-main{
-    width: 90%;
-    margin: 0 auto;
-    /* border: 1px solid red; */
-    padding-top: 20px;
-}
-main form {
-    width: 60%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-main form input{
-    height: 3rem;
-    font-size: 2.2rem;
-    outline: none;
-    padding: 5px 15px;
-}
-main form button{
-    width: 30%;
-    height: 2.5rem;
-    font-size: 1.4rem;
-    background-color: blue;
-    color: white;
-    border: none;
-    outline: none;
-    padding: 5px;
-    margin: 0 auto;
-    cursor: pointer;
-    border-radius: 5px;
-}
 
 
-h1,h2{
-    text-align: center;
-    margin-top: 10px;
-}
-
-.product-wrapper{
-    width: 80%;
-    margin: 5px auto;
-    margin-top: 10px;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 20px;
-}
-.product{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 10px;
-    border: 2px solid gray;
-    border-radius: 5px;
-}
-.product h4{
-    font-size: 1.5rem;
-}
-.product img{
-    width: 100%;
-    aspect-ratio: 1/1;
-}
-.btn{
-    box-sizing: border-box;
-    width: max-content;
-    padding: 5px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: blue;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    height: 2rem;
-    transition: all 400ms ease;
-    font-size: 1rem !important;
-    
-}
-form .btn{
-    font-family: inherit;
-}
 .btn:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 a{
     text-decoration: none;

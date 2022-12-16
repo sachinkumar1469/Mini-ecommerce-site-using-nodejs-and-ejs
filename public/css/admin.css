@@ -1,0 +1,36 @@
+main{
+    height: calc(100vh - 3.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+main form{
+    width: 400px;
+    height: max-content;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    gap: 15px;
+    padding: 15px 15px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    
+}
+main form input{
+    height: 30px;
+    padding: 0px 10px;
+    outline: none;
+    border: 1px solid black;
+    background-color: transparent;
+}
+main form .btn{
+    width: 50%;
+    align-self: center;
+}
+main form .btn::hover{
+    transform: scale(1) !important;
+}
+h4{
+    text-align: center;
+}

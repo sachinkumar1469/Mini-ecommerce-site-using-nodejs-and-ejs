@@ -1,0 +1,19 @@
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: aquamarine;
+    /* background-color: blue; */
+}
+nav ul li a {
+    /* border: 1px solid red; */
+    border-radius: 5px;
+    padding: 2px 6px;
+    overflow: hidden;
+    box-shadow: inset 0px 0px 0px 0px white;
+    transition: all 400ms ease;
+}
+
+nav ul li a:hover{
+   box-shadow: inset 100px 0px 0px 0px white;
+}

@@ -1,0 +1,67 @@
+main{
+    background-color: rgb(228, 228, 228);
+    width: 100%;
+    min-height: calc(100vh - 3.5rem);
+}
+.main-container{
+    width: 35%;
+    min-height: 90%;
+    margin: 0 auto;
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+    /* border: 1px solid red; */
+    padding:20px 0px;
+
+}
+.main-container .product-wrapper{
+    display: grid;
+    grid-template-columns: 100%;
+    /* border: 1px solid red; */
+    background-color: white;
+    column-gap: 15px;
+    row-gap: 15px;
+    padding: 15px 10px;
+}
+.main-container .product-wrapper .product{
+    /* border: 1px solid red; */
+    padding: 5px 0px;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+/* .main-container .product-wrapper .product *{
+    border: 1px solid red;
+} */
+.main-container .product-wrapper .product img{
+    height: 250px;
+    aspect-ratio: 1/1;
+}
+.main-container .product-wrapper .product .product-title{
+    font-size: 1.1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 4px;
+}
+.main-container .product-wrapper .product .product-price{
+    font-size: 0.8rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 4px;
+}
+.btn{
+    background-color: blue;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    padding: 7px 10px;
+    color: white !important;
+    font-size: inherit !important;
+    font-family: 'sans-serif' !important;
+    margin-bottom: 7px;
+    transition: all 400ms ease;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+form{
+    font-size: inherit;
+}
