@@ -5,6 +5,6 @@ const path = require('path');
 //Controller Imports
 const {shopMainController} = require('../controllers/shop')
 
-router.use('/',shopMainController)
+router.use('/',shopMainController);
 
 module.exports = router;
