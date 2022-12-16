@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> shop </title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/main.css">
     <style>
         form .btn{
             font-size: 1rem;
@@ -18,27 +20,34 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+            </ul>
+            <ul>
                 <li><a href="/cart">Cart</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h1>My Products</h1>
-        <p>List of all products...</p>
-        <div class="product-wrapper">
-            <%  for(let product of products) { %>
-                <div class="product">
-                    <h4><%=product.title%></h4>
-                    <img src="<%=product.imageUrl%>" alt="">
-                    <p>Price: <%= product.price%>$</p>
-                    <p><%= product.description%></p>
-                    <a href="/product/<%=product.id%>" class="btn">View Details</a>
-                    <form action="/cart/add-product" method="POST">
-                        <button type="submit" class="btn">Add to Cart</button>
-                        <input type="hidden" name="productId" value="<%=product.id%>">
-                    </form>
-                </div>
-            <% }%>
+        <div class="main-container">
+            <div class="categories">
+                
+            </div>
+            <div class="product-wrapper">
+                <%  for(let product of products) { %>
+                    <div class="product">
+                        
+                        <img src="<%=product.imageUrl%>" alt="">
+                        <h4 class="product-title"><%=product.title%></h4>
+                        <p class="product-price">Price: <%= product.price%>$</p>
+                        <!-- <p><%= product.description%></p> -->
+                        <a href="/product/<%=product._id%>" class="btn">View Details</a>
+                        <form action="/cart/add-product" method="POST">
+                            <button type="submit" class="btn">Add to Cart</button>
+                            <input type="hidden" name="productId" value="<%=product._id%>">
+                        </form>
+                    </div>
+                <% }%>
+            </div>
         </div>
     </main>
 </body>

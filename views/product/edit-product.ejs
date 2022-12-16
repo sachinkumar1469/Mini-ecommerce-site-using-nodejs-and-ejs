@@ -4,27 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Project</title>
+    <title>Admin Console</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <style>
+       
+    </style>
 </head>
 <body>
     <header>
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/shop">shop</a></li>
+                <li><a href="/shop">Shop</a></li>
+            </ul>
+            <ul>
+                <li><a href="/admin/products">Products</a></li>
             </ul>
         </nav>
     </header>
-    <h1>Edit Product </h1>
     <main>
         <form method="post" action="/admin/update-product">
-            <input type="hidden" name="id" id="" value="<%=product.id%>" >
+            <input type="hidden" name="id" id="" value="<%=product._id%>" >
             <input type="text" name="title" id="" value="<%=product.title%>"  placeholder="New Title" >
             <input type="text" name="imageUrl" value="<%=product.imageUrl%>" id="" placeholder="New Image URL">
             <input type="text" name="description" value="<%=product.description%>" placeholder="New description" id="">
             <input type="number" name="price" id="" value="<%=product.price%>" placeholder="New Product Price">
-            <button type="submit">Edit Product</button>
+            <button type="submit" class="btn">Edit Product</button>
         </form>
     </main>
 </body>

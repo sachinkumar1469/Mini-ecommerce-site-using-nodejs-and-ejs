@@ -6,20 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/main.css">
     <style>
-        form{
-            width: 20%;
-            margin: 8px auto;
+        main{
+            /* height: calc(100vh - 3.5rem); */
+            padding: 20px;
+        }
+        .main-container{
             display: flex;
-            justify-content: center;
-            
-        }
-        .btn{
-            color: white;
-            cursor: pointer;
-        }
-        h3{
-            text-align: center;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
         }
     </style>
 </head>
@@ -32,30 +30,29 @@
             </ul>
         </nav>
     </header>
+   
     <main>
-        <h1>My Cart</h1>
-        <p>List of all items...</p>   
-        <div class="product-wrapper">
-
-            <%for(let product of cartProd) { %> 
-                <div class="product">
-                <h4><%=product.title%></h4>
-                <img src="<%=product.imageUrl%>" alt="">
-                <p>Price: <%= product.productPrice%>$</p>
-                <P>Quantity: <%=product.qty%></P>
-                <a href="/product/<%=product.id%>" class="btn">View Details</a>
-                <!-- <form action="/cart/add-product" method="POST">
-                    <button type="submit" class="btn">Add to Cart</button>
-                    <input type="hidden" name="productId" value="<%=product.id%>">
-                </form> -->
-            </div>
-            <% }%>
+        <div class="main-container">
+            <div class="product-wrapper">
+                <%for(let product of products) { %>
+                    <% product._id = product._id.toString()%>
+                    <div class="product">
+                        <!-- <p><%=product._id%></p> -->
+                        <img src="<%=product.imageUrl%>"/>
+                        <h4 class="product-title"><%=product.title%></h4>
+                        <p class="product-price">Price: <%= product.price%>$</p>
+                        <P class="product-price">Quantity: <%=product.qty%></P>
+                        <a href="/product/<%=product._id%>" class="btn">View Details</a>
+                        <a href="/cart/delete-product/<%=product._id%>" class="btn">Delete From Cart</a>
+                    </div>
+                    <% }%>
+            </div>   
+            <form action="/order" method="post">
+                <button type="submit" class="btn">Place Order</button>
+            </form>
         </div>
     </main>
     <br>
-    <h3> Total Price : <%=cartPrice%> </h3>
-    <form action="/order" method="post">
-        <button type="submit" class="btn">Place Order</button>
-    </form>
+   
 </body>
 </html>

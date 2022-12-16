@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeJs Tutorial</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/" >Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/admin">Admin</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/order/order-details">Orders</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Orders</h1>
+    <h2>Details of all the orders</h2>
+    <main>
+
+        <div class="product-wrapper">
+
+            <%for(let order of orderArray) { %>
+                
+            <div class="product">
+                <div>Order Id: <%=order[0].orderId%></div>
+                <% for(let orderItem of order) {%>
+                    <div>Quantity: <%=orderItem.quantity%> <br> ProductId: <%=orderItem._id%> </div>
+                <% } %>
+            </div>
+            <% }%>
+        </div>
+
+    </main>
+</body>
+</html>
