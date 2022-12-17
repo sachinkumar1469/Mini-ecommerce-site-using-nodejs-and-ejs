@@ -4,20 +4,18 @@ const mongodb = require('mongodb')
 const productModel = require('../models/product')
 
 exports.defaultAdminRoute = (req,res,next)=>{
-            productModel.find({})
-            .then(result=>{
-                res.render(path.join(require.main.filename,'..','views','admin'),{products:result});
-                // console.log(result)
-            }).catch(err=>{
-                console.log("Error in fetching product")
-            })
-            
+    if(req.session.user){
+        res.render(path.join(require.main.filename,'..','views','admin'));
+    }else {
+        res.redirect('/login')
+    }         
 }
 
 exports.addProductHandler = (req,res,next)=>{
     // console.log(req.body); 
+    const userId = req.session.user._id;
     const {title,imageUrl,description,price} = req.body;
-    productModel.create({title,price,imageUrl,description,userId: new mongodb.ObjectId(req.user._id)})
+    productModel.create({title,price,imageUrl,description,userId})
         .then(result=>{
             console.log(result);
             res.redirect('/admin');

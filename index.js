@@ -62,33 +62,44 @@ App.use(cookieParser());
 //     next(); // <-- important!
 //   });
 
-App.use((req,res,next)=>{
-    userModel.find({email:'sachinyadav1469@gmail.com'})
-        .then(result=>{
-            // console.log(result,"outside");
-            if(result.length==0){
-                console.log("Inside")
-                userModel.create({name:"Sachin Yadav",email:'sachinyadav1469@gmail.com',cart:{items:[]}})
-                .then(newUser=>{
+// App.use((req,res,next)=>{
+//     userModel.find({email:'sachinyadav1469@gmail.com'})
+//         .then(result=>{
+//             // console.log(result,"outside");
+//             if(result.length==0){
+//                 console.log("Inside")
+//                 userModel.create({name:"Sachin Yadav",email:'sachinyadav1469@gmail.com',cart:{items:[]}})
+//                 .then(newUser=>{
                     
-                    req.user = newUser;
-                    // console.log(newUser,"new userrrrrrrrrrrrrrrrrrr");
-                    next();
-                })
-                .catch(err=>{
-                    console.log("Unable to create new user");
-                })
-            }else {
-                req.user = result[0];
-                next();
-            }
+//                     req.user = newUser;
+//                     // console.log(newUser,"new userrrrrrrrrrrrrrrrrrr");
+//                     next();
+//                 })
+//                 .catch(err=>{
+//                     console.log("Unable to create new user");
+//                 })
+//             }else {
+//                 req.user = result[0];
+//                 next();
+//             }
             
-        })
-        .catch(err=>{
-            console.log("Unable to find user by given id");
-        })
-})
+//         })
+//         .catch(err=>{
+//             console.log("Unable to find user by given id");
+//         })
+// })
 
+App.use((req,res,next)=>{
+    console.log(req.path.toString());
+    if(req.path == "/login" || req.path == "/login/postlogin"){
+        console.log("Inside")
+        next();
+    } else if(req.session.user) {
+        next();
+    }else {
+        res.redirect('/login');
+    }
+})
 App.use('/admin',adminRouter.router);
 App.use('/shop',shopRoutes);
 App.use('/cart',cartRoutes.router)
@@ -97,9 +108,14 @@ App.use('/product',productRoutes.router);
 App.use('/login',loginRoutes);
 
 App.use('/',(req,res,next)=>{
-    // console.log(req.session.isLoggedIn)
-    
-    res.render(path.join(__dirname,'views','home'));   
+    console.log(req.session);
+    // req.session.isSachin = true;
+    // console.log(req.session.user);
+    if(req.session.user){
+        res.render(path.join(__dirname,'views','home'));   
+    } else {
+        res.redirect('/login')
+    }
 })
 
 
