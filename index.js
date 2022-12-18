@@ -5,9 +5,13 @@ const mongodb = require('mongodb');
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const MongoDbSessionStore = require('connect-mongodb-session')(session)
+const csrf = require('csurf')
+const MongoDbSessionStore = require('connect-mongodb-session')(session);
+
 
 const App = express();
+
+const csrfProtection = csrf();
 const store = new MongoDbSessionStore({
     uri:'mongodb+srv://sachinyadav1469:Sachin%40123@cluster0.my3twen.mongodb.net/shop2?retryWrites=true&w=majority'
     ,collection:'session'
@@ -33,6 +37,7 @@ const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/order');
 const productRoutes = require('./routes/product');
 const loginRoutes = require('./routes/login');
+const singupRoute = require('./routes/signup')
 
 App.use(express.static(path.join(__dirname,'public'))); // to send the static file
 
@@ -45,54 +50,19 @@ App.use(session({secret:"Hello My Self Sachin Kumar",resave:false,saveUninitiali
 
 
 App.use(cookieParser());
-// App.use(function (req, res, next) {
-//     // check if client sent cookie
-//     console.log(req.path)
-//     var cookie = req.cookies.isAuth;
-//     if (cookie === undefined) {
-//       // no: set a new cookie
-//       var isAuth = true;
-      
-//       res.cookie('isAuth',isAuth, { maxAge: 900000, httpOnly: true });
-//       console.log('cookie created successfully');
-//     } else {
-//       // yes, cookie was already present 
-//       console.log('cookie exists', cookie);
-//     } 
-//     next(); // <-- important!
-//   });
 
-// App.use((req,res,next)=>{
-//     userModel.find({email:'sachinyadav1469@gmail.com'})
-//         .then(result=>{
-//             // console.log(result,"outside");
-//             if(result.length==0){
-//                 console.log("Inside")
-//                 userModel.create({name:"Sachin Yadav",email:'sachinyadav1469@gmail.com',cart:{items:[]}})
-//                 .then(newUser=>{
-                    
-//                     req.user = newUser;
-//                     // console.log(newUser,"new userrrrrrrrrrrrrrrrrrr");
-//                     next();
-//                 })
-//                 .catch(err=>{
-//                     console.log("Unable to create new user");
-//                 })
-//             }else {
-//                 req.user = result[0];
-//                 next();
-//             }
-            
-//         })
-//         .catch(err=>{
-//             console.log("Unable to find user by given id");
-//         })
-// })
+App.use(csrfProtection);
+App.use((req,res,next)=>{
+    res.locals.csrfToken = req.csrfToken();
+    next();
+})
+
+App.use('/signup',singupRoute);
 
 App.use((req,res,next)=>{
-    console.log(req.path.toString());
+    // console.log(req.path.toString());
     if(req.path == "/login" || req.path == "/login/postlogin"){
-        console.log("Inside")
+        // console.log("Inside")
         next();
     } else if(req.session.user) {
         next();
