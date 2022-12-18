@@ -19,23 +19,26 @@
     <header>
         <nav>
             <ul>
-               
+                <!-- <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li> -->
             </ul>
             <ul>
-                <li><a href="/signup">Sign Up</a></li>
+                <li><a href="/login">Sign In</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <form method="post" action="/login/postlogin">
-            <h4>Sign In</h4>
+        <form method="post" action="/signup/postSignup">
+            <h4>Sign Up</h4>
             <input type="hidden" name="_csrf" value="<%=csrfToken%>">
-            <input type="text" name="email" id="" placeholder="email">
-            <input type="password" name="password" id="" placeholder="password">
-            <%if(isExist == false){%>
-                <p>User doesn't exist please signup</p>
-            <%}%>
-            <button type="submit" class="btn">Sign In</button>
+            <input type="text" name="name" id="" placeholder="Name">
+            <input type="text" name="email" id="" placeholder="Email">
+            <input type="password" name="password" id="" placeholder="Password">
+            <input type="password" name="confirmPassword" id="" placeholder="Confirm password">
+            <% if(user != null){ %>
+            <p>User already exists please signin</p>
+            <% } %>
+            <button type="submit" class="btn">Sign Up</button>
         </form>
        
     </main>
