@@ -5,13 +5,13 @@ const sgMail = require('@sendgrid/mail')
 
 const nodemailer = require('nodemailer');
 const sendGridTransport = require('nodemailer-sendgrid-transport')
-sgMail.setApiKey('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')
+sgMail.setApiKey(process.env.SEND_GRID_API)
 
-const transporter = nodemailer.createTransport(sendGridTransport({
-    auth:{
-        api_key: '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'
-    }
-}))
+// const transporter = nodemailer.createTransport(sendGridTransport({
+//     auth:{
+//         api_key: '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'
+//     }
+// }))
 
 exports.signUpController = (req,res,next)=>{
     console.log(req.body);
