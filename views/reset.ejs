@@ -23,22 +23,20 @@
             </ul>
             <ul>
                 <li><a href="/signup">Sign Up</a></li>
+                <li><a href="/login">Login</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <form method="post" action="/login/postlogin">
-            <h4>Sign In</h4>
+        <form method="post" action="/reset/postReset">
+            <h4>Reset Password</h4>
+            <h5 style="text-align: center;">You will recieve password reset link in your mail!</h5>
             <input type="hidden" name="_csrf" value="<%=csrfToken%>">
             <input type="text" name="email" id="" placeholder="email">
-            <input type="password" name="password" id="" placeholder="password">
             <%if(isExist == false){%>
-                <p>User doesn't exist please signup</p>
+                <p style="text-align: center;">User doesn't exist please signup</p>
             <%}%>
-            <button type="submit" class="btn">Sign In</button>
-            <h4>
-                <a style="color: black;" href="/reset">Reset Password</a>
-            </h4>
+            <button type="submit" class="btn">Reset!</button>
         </form>
        
     </main>
