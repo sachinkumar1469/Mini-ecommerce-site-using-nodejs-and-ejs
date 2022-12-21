@@ -37,7 +37,8 @@ const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/order');
 const productRoutes = require('./routes/product');
 const loginRoutes = require('./routes/login');
-const singupRoute = require('./routes/signup')
+const singupRoute = require('./routes/signup');
+const resetRoute = require('./routes/reset');
 
 App.use(express.static(path.join(__dirname,'public'))); // to send the static file
 
@@ -58,6 +59,9 @@ App.use((req,res,next)=>{
 })
 
 App.use('/signup',singupRoute);
+
+App.use('/reset',resetRoute)
+
 
 App.use((req,res,next)=>{
     // console.log(req.path.toString());

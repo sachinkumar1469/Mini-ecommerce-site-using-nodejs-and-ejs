@@ -1,11 +1,11 @@
 const path = require('path');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
-const sgMail = require('@sendgrid/mail')
+const sgMail = require('@sendgrid/mail');
 
 const nodemailer = require('nodemailer');
 const sendGridTransport = require('nodemailer-sendgrid-transport')
-sgMail.setApiKey(process.env.SEND_GRID_API)
+sgMail.setApiKey(process.env.SEND_GRID_API);
 
 // const transporter = nodemailer.createTransport(sendGridTransport({
 //     auth:{
@@ -32,7 +32,7 @@ exports.postSignupController = (req,res,next)=>{
         } else {
             bcrypt.hash(password,12)
             .then(encryptPass=>{
-                console.log(encryptPass)
+                // console.log(encryptPass)
                 User.create({name,email,password:encryptPass,cart:{items:[]}})
                 .then(result=>{
                     req.session.user = result;
