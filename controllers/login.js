@@ -1,6 +1,7 @@
 const path = require('path');
 const userModel = require('../models/user');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const {validationResult} = require('express-validator/check')
 
 exports.loginDefault = (req,res,next)=>{
     // console.log(req.session.isLoggedIn)
@@ -12,6 +13,10 @@ exports.loginDefault = (req,res,next)=>{
 
 exports.postLogin = (req,res,next)=>{
     // res.setHeader('Set-Cookie','isLoggedIn=true');
+    const error = validationResult(req);
+    if(error.array().length){
+        return res.send(error);
+    }
     console.log(req.body);
     const email = req.body.email;
     const password = req.body.password;
