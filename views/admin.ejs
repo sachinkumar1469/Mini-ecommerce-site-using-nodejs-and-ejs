@@ -26,11 +26,11 @@
         </nav>
     </header>
     <main>
-        <form method="post" action="/admin/add-product">
+        <form method="post" action="/admin/add-product" enctype="multipart/form-data">
             <h4>Add Product</h4>
             <input type="hidden" name="_csrf" value="<%=csrfToken%>">
             <input type="text" name="title" id="" placeholder="Title">
-            <input type="text" name="imageUrl" id="" placeholder="Image URL">
+            <input type="file" name="image" id="" placeholder="Image URL">
             <input type="text" name="description" id="" placeholder="Description">
             <input type="number" name="price" id="" placeholder="Product Price">
             <button type="submit" class="btn">Add Product</button>

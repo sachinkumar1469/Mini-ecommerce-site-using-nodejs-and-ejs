@@ -12,17 +12,18 @@ exports.defaultAdminRoute = (req,res,next)=>{
 }
 
 exports.addProductHandler = (req,res,next)=>{
+    console.log(req.file);
     // console.log(req.body); 
-    const userId = req.session.user._id;
-    const {title,imageUrl,description,price} = req.body;
-    productModel.create({title,price,imageUrl,description,userId})
-        .then(result=>{
-            console.log(result);
-            res.redirect('/admin');
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+    // const userId = req.session.user._id;
+    // const {title,imageUrl,description,price} = req.body;
+    // productModel.create({title,price,imageUrl,description,userId})
+    //     .then(result=>{
+    //         console.log(result);
+    //         res.redirect('/admin');
+    //     })
+    //     .catch(err=>{
+    //         console.log(err);
+    //     })
 }
 
 exports.editProduct = (req,res,next)=>{

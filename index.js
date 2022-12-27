@@ -5,8 +5,9 @@ const mongodb = require('mongodb');
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const csrf = require('csurf')
+const csrf = require('csurf');
 const MongoDbSessionStore = require('connect-mongodb-session')(session);
+const multer = require('multer');
 
 
 const App = express();
@@ -46,6 +47,7 @@ App.set('view engine','ejs'); // To set template engine
 App.set('views','views'); // To set folder for template engine files
 
 App.use(bodyParser.urlencoded({extended:false})); // to parse the incoming request
+App.use(multer({dest:`images`}).single('image'))
 
 App.use(session({secret:"Hello My Self Sachin Kumar",resave:false,saveUninitialized:false,store}))
 
