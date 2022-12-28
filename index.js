@@ -1,97 +1,37 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
-const mongodb = require('mongodb');
-const mongoose = require('mongoose')
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const csrf = require('csurf');
-const MongoDbSessionStore = require('connect-mongodb-session')(session);
-const multer = require('multer');
 
+const placeRoutes = require('./routes/places-route');
+const userRoutes = require("./routes/users-route");
+const HttpError = require("./model/http-error");
 
-const App = express();
+const mongoose = require('mongoose');
 
-const csrfProtection = csrf();
-const store = new MongoDbSessionStore({
-    uri:'mongodb+srv://sachinyadav1469:Sachin%40123@cluster0.my3twen.mongodb.net/shop2?retryWrites=true&w=majority'
-    ,collection:'session'
-});
+const app = express();
 
-mongoose.connect('mongodb+srv://sachinyadav1469:Sachin%40123@cluster0.my3twen.mongodb.net/shop2?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://sachinyadav1469:Sachin%40123@cluster0.my3twen.mongodb.net/yourvisit?retryWrites=true&w=majority')
 .then(result=>{
     // console.log(result);
-    App.listen(8081);
+    app.listen(8081);
 })
 .catch(err=>{
-    console.log(err)
+    console.log("Unable to connect to database!")
 })
 
-const userModel = require('./models/user');
 
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
-const productModel = require('./models/product');
+app.use('/api/places',placeRoutes);
+app.use('/api/users',userRoutes);
 
-const adminRouter = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
-const cartRoutes = require('./routes/cart');
-const orderRoutes = require('./routes/order');
-const productRoutes = require('./routes/product');
-const loginRoutes = require('./routes/login');
-const singupRoute = require('./routes/signup');
-const resetRoute = require('./routes/reset');
-
-App.use(express.static(path.join(__dirname,'public'))); // to send the static file
-
-App.set('view engine','ejs'); // To set template engine
-App.set('views','views'); // To set folder for template engine files
-
-App.use(bodyParser.urlencoded({extended:false})); // to parse the incoming request
-App.use(multer({dest:`images`}).single('image'))
-
-App.use(session({secret:"Hello My Self Sachin Kumar",resave:false,saveUninitialized:false,store}))
-
-
-App.use(cookieParser());
-
-App.use(csrfProtection);
-App.use((req,res,next)=>{
-    res.locals.csrfToken = req.csrfToken();
-    next();
+app.use((req,res,next)=>{
+    throw new HttpError("404, Page not found",404)
 })
 
-App.use('/signup',singupRoute);
-
-App.use('/reset',resetRoute)
-
-
-App.use((req,res,next)=>{
-    // console.log(req.path.toString());
-    if(req.path == "/login" || req.path == "/login/postlogin"){
-        // console.log("Inside")
-        next();
-    } else if(req.session.user) {
-        next();
-    }else {
-        res.redirect('/login');
+app.use((error,req,res,next)=>{
+    if(res.headerSent){
+        return next(error);
     }
+    res.status(error.code || 500 ).json({message:error.message || "An unkown error occurred"})
 })
-App.use('/admin',adminRouter.router);
-App.use('/shop',shopRoutes);
-App.use('/cart',cartRoutes.router)
-App.use('/order',orderRoutes.router);
-App.use('/product',productRoutes.router);
-App.use('/login',loginRoutes);
-
-App.use('/',(req,res,next)=>{
-    console.log(req.session);
-    // req.session.isSachin = true;
-    // console.log(req.session.user);
-    if(req.session.user){
-        res.render(path.join(__dirname,'views','home'));   
-    } else {
-        res.redirect('/login')
-    }
-})
-
-
