@@ -1,13 +1,17 @@
 const express = require('express');
 const path = require('path');
-const {handleOrderController,showOrderDetails} = require('../controllers/order')
+
+
+const isAuth = require('../middleware/isAuth')
+const {handleOrderController,showOrderDetails,getOrderInvoice,checkout} = require('../controllers/order')
 
 
 const router = express.Router();
 
 
-
-router.use('/order-details',showOrderDetails)
-router.use('/',handleOrderController)
+router.get('/checkout',checkout)
+router.use('/order-details',showOrderDetails);
+router.get('/:orderId',getOrderInvoice)
+router.use('/',isAuth,handleOrderController)
 
 exports.router = router;

@@ -13,7 +13,7 @@ exports.loginDefault = (req,res,next)=>{
 
 exports.postLogin = (req,res,next)=>{
     // res.setHeader('Set-Cookie','isLoggedIn=true');
-    c
+    
     const error = validationResult(req);
     if(error.array().length){
         return res.send(error);

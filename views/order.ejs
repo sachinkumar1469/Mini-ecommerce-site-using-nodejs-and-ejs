@@ -22,18 +22,23 @@
     </header>
     <h1>Orders</h1>
     <h2>Details of all the orders</h2>
+    <hr>
     <main>
 
         <div class="product-wrapper">
 
             <%for(let order of orderArray) { %>
                 
-            <div class="product">
-                <div>Order Id: <%=order[0].orderId%></div>
-                <% for(let orderItem of order) {%>
-                    <div>Quantity: <%=orderItem.quantity%> <br> ProductId: <%=orderItem._id%> </div>
-                <% } %>
-            </div>
+                    <div class="product">
+                        <div>Order Id: <%=order[0]._id%> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href="/order/<%=order[0]._id%>" target="_blank" style="color: blue;">Invoice</a></div>
+                        <br>
+                        <% for(let orderItem of order) {%>
+                            <div>Quantity: <%=orderItem.quantity%> <br> ProductId: <%=orderItem._id%> </div>
+                            <br>
+                        <% } %>
+                        <hr>
+                    </div>
+                
             <% }%>
         </div>
 

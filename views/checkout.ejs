@@ -26,13 +26,16 @@
         </nav>
     </header>
     <main>
-        <form method="post" action="/admin/update-product">
-            <input type="hidden" name="id" id="" value="<%=product._id%>" >
-            <input type="text" name="title" id="" value="<%=product.title%>"  placeholder="New Title" >
-            <input type="text" name="description" value="<%=product.description%>" placeholder="New description" id="">
-            <input type="number" name="price" id="" value="<%=product.price%>" placeholder="New Product Price">
-            <button type="submit" class="btn">Edit Product</button>
+        <form method="post" action="/admin/add-product" enctype="multipart/form-data">
+            <h4>Add Product</h4>
+            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+            <input type="text" name="title" id="" placeholder="Title">
+            <input type="file" name="image" id="" placeholder="Image URL">
+            <input type="text" name="description" id="" placeholder="Description">
+            <input type="number" name="price" id="" placeholder="Product Price">
+            <button type="submit" class="btn">Add Product</button>
         </form>
+       
     </main>
 </body>
 </html>
